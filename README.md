@@ -1,4 +1,4 @@
 JediUtil
 ========
 
-A basic Utility Package built mainly on lwjgl
+A basic utility package built mainly on lwjgl
