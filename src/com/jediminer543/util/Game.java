@@ -7,6 +7,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
 
 import com.jediminer543.util.camera.Camera;
+import com.jediminer543.util.renders.ColourRGB;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -22,6 +23,8 @@ public class Game {
 	 */
 	private int maxFPS;
 	private String Title;
+	
+	public static ColourRGB bgcolour = new ColourRGB(0,0,250);
 	
 	public static int activeCamera = 0;
 	public static IInit[] init = new IInit[100]; 
@@ -45,12 +48,19 @@ public class Game {
 	
 	public void init()
 	{
-		initgl();
 		initDisplay();
+		initgl();
 		for (IInit Init:init)
 		{
+			try
+			{
 			Init.init();
 			System.out.println("Initialising " + IInit.debugName);
+			}catch(Exception e)
+			{
+				System.out.println("Error occured when initialising " + IInit.debugName);
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -97,8 +107,9 @@ public class Game {
 		glEnable(GL_CULL_FACE);
 	    glCullFace(GL_BACK);
 		glLoadIdentity();
-		
+		calcCamera();
 		glMatrixMode(GL_MODELVIEW);
+		GL11.glColor3f(bgcolour.R, bgcolour.G, bgcolour.G);
 		glLoadIdentity();
 		glEnable(GL_DEPTH_TEST);
 		
