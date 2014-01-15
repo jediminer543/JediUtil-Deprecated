@@ -20,8 +20,9 @@ public class ObjectLoader {
 			    if (prefix.equals("#")) {
 			        continue;
 			    } else if (prefix.equals("v")) {
-			    	parseVertex(line);
+			    	m.vertices.add(parseVertex(line));
 			    } else if (prefix.equals("vn")) {
+			    	m.normals.add(parseNormal(line));
 			    } else if (prefix.equals("f")) {
 			    }
 			}
@@ -31,9 +32,37 @@ public class ObjectLoader {
 	
 	public static Vector3f  parseVertex(String line)
 	{
+		String[] split = line.split(" ");
+		float x = Float.valueOf(split[1]);
+		float y = Float.valueOf(split[2]);
+		float z = Float.valueOf(split[3]);
+		return new Vector3f(x,y,z);
 		
+	}
+	
+	public static Vector3f  parseNormal(String line)
+	{
+		String[] split = line.split(" ");
+		float x = Float.valueOf(split[1]);
+		float y = Float.valueOf(split[2]);
+		float z = Float.valueOf(split[3]);
+		return new Vector3f(x,y,z);
 		
-		return null;
+	}
+	
+	public static Vector3f[]  parseFace(String line)
+	{
+		Vector3f[] output = null;
+		String[] split = line.split(" ");
+		float x = Float.valueOf(split[1]);
+		float y = Float.valueOf(split[2]);
+		float z = Float.valueOf(split[3]);
+		//float[] x = Float.valueOf(split[1].split(""));
+		//float[] y = Float.valueOf(split[2]);
+		//float[] z = Float.valueOf(split[3]);
+		
+		return output;
+		
 		
 	}
 }
