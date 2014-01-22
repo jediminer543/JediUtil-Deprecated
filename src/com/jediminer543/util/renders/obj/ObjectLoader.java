@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.lwjgl.util.vector.Vector3f;
 
@@ -50,13 +51,14 @@ public class ObjectLoader {
 		
 	}
 	
-	public static Vector3f[]  parseFace(String line)
+	public static ArrayList<Vector3f>  parseFace(String line)
 	{
-		Vector3f[] output = null;
+		ArrayList<Vector3f> output = new ArrayList<Vector3f>();
 		String[] split = line.split(" ");
-		float x = Float.valueOf(split[1]);
-		float y = Float.valueOf(split[2]);
-		float z = Float.valueOf(split[3]);
+		float x = Float.valueOf(split[1].split("//")[0]);
+		float y = Float.valueOf(split[2].split("//")[0]);
+		float z = Float.valueOf(split[3].split("//")[0]);
+		output.add(new Vector3f(x,y,z));
 		//float[] x = Float.valueOf(split[1].split(""));
 		//float[] y = Float.valueOf(split[2]);
 		//float[] z = Float.valueOf(split[3]);
