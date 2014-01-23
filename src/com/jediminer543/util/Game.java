@@ -1,5 +1,7 @@
 package com.jediminer543.util;
 
+import java.util.ArrayList;
+
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
@@ -8,6 +10,7 @@ import org.lwjgl.util.glu.GLU;
 
 import com.jediminer543.util.camera.Camera;
 import com.jediminer543.util.renders.ColourRGB;
+import com.jediminer543.util.renders.IRenderable;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -27,8 +30,9 @@ public class Game {
 	public static ColourRGB bgcolour = new ColourRGB(0,0,250);
 	
 	public static int activeCamera = 0;
-	public static IInit[] init = new IInit[100]; 
-	public static Camera[] cameras = new Camera[50];
+	public static ArrayList<IInit> init = new ArrayList<IInit>(); 
+	public static ArrayList<IRenderable> renders = new ArrayList<IRenderable>(); 
+	public static ArrayList<Camera> cameras = new ArrayList<Camera>();
 	
 
 	/**
@@ -117,7 +121,7 @@ public class Game {
 	
 	public void calcCamera()
 	{
-		cameras[activeCamera].repos();
+		cameras.get(activeCamera).repos();
 	}
 	
 	public void start()

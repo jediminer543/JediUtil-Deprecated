@@ -1,13 +1,12 @@
 package com.jediminer543.util.renders.obj;
 
-import java.util.ArrayList;
-
 import org.lwjgl.util.vector.Vector3f;
 
 public class Face
 {
-	
-	public ArrayList<Vector3f> vertices;
-	public ArrayList<Vector3f> normals;
+	public boolean normals = false;
+	public Vector3f vertex;
+	public Vector3f normal;
+	public Vector3f texture;
 
 }

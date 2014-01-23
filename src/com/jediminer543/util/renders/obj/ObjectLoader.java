@@ -25,6 +25,19 @@ public class ObjectLoader {
 			    } else if (prefix.equals("vn")) {
 			    	m.normals.add(parseNormal(line));
 			    } else if (prefix.equals("f")) {
+			    	Face f1 = new Face();
+			    	ArrayList<Vector3f> output = parseFace(line);
+			    	f1.vertex = output.get(0);
+			    	if (output.size() == 2)
+			    	{
+			    		f1.normal = output.get(1);
+			    		f1.normals = true;
+			    	}
+			    	if (output.size() == 3)
+			    	{
+			    		f1.texture = output.get(2);
+			    	}
+			    	m.faces.add(f1);
 			    }
 			}
 		reader.close();
@@ -59,9 +72,16 @@ public class ObjectLoader {
 		float y = Float.valueOf(split[2].split("//")[0]);
 		float z = Float.valueOf(split[3].split("//")[0]);
 		output.add(new Vector3f(x,y,z));
-		//float[] x = Float.valueOf(split[1].split(""));
-		//float[] y = Float.valueOf(split[2]);
-		//float[] z = Float.valueOf(split[3]);
+		try{
+			float nx = Float.valueOf(split[1].split("//")[0]);
+			float ny = Float.valueOf(split[2].split("//")[0]);
+			float nz = Float.valueOf(split[3].split("//")[0]);
+			output.add(new Vector3f(nx,ny,nz));
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 		
 		return output;
 		
