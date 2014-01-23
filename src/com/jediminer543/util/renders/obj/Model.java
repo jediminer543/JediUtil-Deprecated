@@ -10,9 +10,9 @@ import com.jediminer543.util.renders.IRenderable;
 
 public class Model implements IRenderable {
 
-	public ArrayList<Vector3f> vertices;
-	public ArrayList<Vector3f> normals;
-	public ArrayList<Face> faces;
+	public ArrayList<Vector3f> vertices = new ArrayList<Vector3f>();
+	public ArrayList<Vector3f> normals = new ArrayList<Vector3f>();
+	public ArrayList<Face> faces = new ArrayList<Face>();
 	@Override
 	public void render()
 	{

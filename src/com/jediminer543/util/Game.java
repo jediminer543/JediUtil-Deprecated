@@ -27,7 +27,7 @@ public class Game {
 	private int maxFPS;
 	private String Title;
 	
-	public static ColourRGB bgcolour = new ColourRGB(0,0,250);
+	public static ColourRGB bgcolour = new ColourRGB(25,25,250);
 	
 	public static int activeCamera = 0;
 	public static ArrayList<IInit> init = new ArrayList<IInit>(); 
@@ -76,7 +76,7 @@ public class Game {
 		GL11.glLoadIdentity();
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
-		GLU.gluPerspective(50f, SX/ SY, 0.01f, 100f);
+		//GLU.gluPerspective(50f, SX/ SY, 0.01f, 100f);
 	}
 	
 	public void initDisplay()
@@ -85,6 +85,7 @@ public class Game {
 		{
 			Display.setDisplayMode(new DisplayMode(SX, SY));
 			Display.setTitle(Title);
+			Display.setInitialBackground(bgcolour.R, bgcolour.G, bgcolour.B);
 			Display.create();
 		} catch (LWJGLException e)
 		{
@@ -96,6 +97,20 @@ public class Game {
 	{
 		while (!Display.isCloseRequested())
 		{
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			//perFrameGL();
+			
+			// set the color of the quad (R,G,B,A)
+			GL11.glColor3f(0.5f,0.5f,1.0f);
+				
+			// draw quad
+			GL11.glBegin(GL11.GL_QUADS);
+			    GL11.glVertex2f(100,100);
+			    GL11.glVertex2f(100+200,100);
+			    GL11.glVertex2f(100+200,100+200);
+			    GL11.glVertex2f(100,100+200);
+			GL11.glEnd();
+
 			Display.sync(maxFPS);
 			
 		    Display.update();
@@ -104,16 +119,16 @@ public class Game {
 	
 	public void perFrameGL()
 	{
+		
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glShadeModel(GL_SMOOTH);
 		glMatrixMode(GL_PROJECTION);
 		glEnable(GL_CULL_FACE);
 	    glCullFace(GL_BACK);
 		glLoadIdentity();
-		calcCamera();
+		GLU.gluPerspective(50f, SX/ SY, 0.01f, 100f);
+		GLU.gluLookAt(-10,0,0,0,0,0,0,0,0);
 		glMatrixMode(GL_MODELVIEW);
-		GL11.glColor3f(bgcolour.R, bgcolour.G, bgcolour.G);
 		glLoadIdentity();
 		glEnable(GL_DEPTH_TEST);
 		
